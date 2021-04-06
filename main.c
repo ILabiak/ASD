@@ -170,17 +170,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT messg,
             printf("\n");
 
         }
-  /*      double A[11][11] ={{0,0,0,0,0,0,0,1,0,0,0},
-                           {0,0,0,0,0,0,0,0,1,0,0},
-                           {0,0,0,0,0,0,0,1,0,0,0},
+        /* double A[11][11] ={{0,0,0,0,0,0,0,0,0,0,0},
                            {0,0,0,0,0,0,0,0,0,0,0},
                            {0,0,0,0,0,0,0,0,0,0,0},
                            {0,0,0,0,0,0,0,0,0,0,0},
+                           {0,0,0,0,0,0,0,0,0,1,0},
+                           {0,0,0,0,0,0,0,0,0,0,1},
                            {0,0,0,0,0,0,0,0,0,0,0},
-                           {1,0,1,0,0,0,0,0,0,0,0},
-                           {0,1,0,0,0,0,0,0,0,0,0},
                            {0,0,0,0,0,0,0,0,0,0,0},
-                           {0,0,0,0,0,0,0,0,0,0,0}};
+                           {0,0,0,0,0,0,0,0,0,0,0},
+                           {0,0,0,0,1,0,0,0,0,0,0},
+                           {0,0,0,0,0,1,0,0,0,0,0}};
 
 */
 SelectObject(hdc, KPen);
@@ -304,7 +304,7 @@ SelectObject(hdc, KPen);
                             if(ny[i] < ny[j])
                             {
                                 Arc(hdc, nx[j]-80, ny[j], nx[i]+80, ny[i], nx[i], ny[i], nx[j], ny[j]);
-                                 arrow((-130*3.1416)/180, nx[j]+dx*cos(-145)-36, ny[j]+dy*sin(-145)+2); //???? ////////////
+                                 arrow((-130*3.1416)/180, nx[j]+dx*cos(-145)-36, ny[j]+dy*sin(-145)+2); //
                             }
                             else if(ny[i] > ny[j])
                             {
@@ -329,7 +329,11 @@ SelectObject(hdc, KPen);
                                 if(nx[i]==nx[j]){
                                  arrow(fi, nx[j]+dx*cos(fi)+7, ny[j]+dy*sin(fi));  //2-9 3-8
                                 }else{
-                                 arrow(fi, nx[j]+dx*cos(fi)+2, ny[j]+dy*sin(fi)); //1-8
+                                    if(nx[i]<nx[j]){
+                                         arrow(fi, nx[j]+dx*cos(fi)+2, ny[j]+dy*sin(fi)); //1-8
+                                    }else{
+                                         arrow(fi, nx[j]+dx*cos(fi)+6, ny[j]+dy*sin(fi)+3);//2-10
+                                    }
                                 }
 
                             }
@@ -353,7 +357,11 @@ SelectObject(hdc, KPen);
                                 if((nx[i]==nx[j]+num)||(nx[i]+num==nx[j])){
                                 arrow(fi, nx[j]+dx*cos(fi), ny[j]+5+dy*sin(fi));
                                 }else{
-                                arrow(fi, nx[j]+dx*cos(fi), ny[j]+3+dy*sin(fi)); //6-11
+                                    if(ny[i]+2*num==ny[j]){
+                                     arrow(fi, nx[j]+dx*cos(fi)+3, ny[j]+dy*sin(fi)+14); //5-10
+                                    }else{
+                                     arrow(fi, nx[j]+dx*cos(fi), ny[j]+3+dy*sin(fi)); //6-11
+                                    }
                                 }
                             }
                             }
@@ -369,7 +377,11 @@ SelectObject(hdc, KPen);
                                 if(nx[i]==nx[j]){
                                 arrow(fi, nx[j]+dx*cos(fi)-14, ny[j]-5+dy*sin(fi)); //9-2 8-3
                                 }else{
-                                arrow(fi, nx[j]+dx*cos(fi)-10, ny[j]-5+dy*sin(fi)+7); //8-1
+                                    if(nx[i]>nx[j]){
+                                        arrow(fi, nx[j]+dx*cos(fi)-10, ny[j]-5+dy*sin(fi)+7); //8-1
+                                    }else{
+                                        arrow(fi, nx[j]+dx*cos(fi)-12, ny[j]-5+dy*sin(fi)-3);//10-2
+                                    }
                                 }
                             }
 
@@ -393,7 +405,11 @@ SelectObject(hdc, KPen);
                                 if((nx[i]==nx[j]+num)||(nx[i]+num==nx[j])){
                             arrow(fi, nx[j]+dx*cos(fi), ny[j]-5+dy*sin(fi));
                                 }else{
-                            arrow(fi, nx[j]+dx*cos(fi), ny[j]-2+dy*sin(fi)); //11-6
+                                    if(ny[i]==ny[j]+2*num){
+                                     arrow(fi, nx[j]+dx*cos(fi)-2, ny[j]+dy*sin(fi)-13);//10-5
+                                    }else{
+                                     arrow(fi, nx[j]+dx*cos(fi), ny[j]-2+dy*sin(fi)); //11-6
+                                    }
                             }
                             }
 
