@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <math.h>
+#include <TIME.H>
 #include <stdlib.h>
 #include <stdio.h>
 #include <conio.h>
@@ -215,7 +216,13 @@ void paintLines(HDC hdc, int matrix[n][n], int nx[n], int ny[n], int start, int 
             if((ny[start] ==ny[end]) &&(abs(nx[start] - nx[end]) > 200)){
 
             }else{
-            LineTo(hdc, nx[end], ny[end]);
+                if((start == 3 && end == 5 )||(start == 3 && end == 6 )||(start == 6 && end == 4 )||(start == 4 && end == 6 )||(start == 6 && end == 3 )
+                    ||(start == 0 && end == 9 )||(start == 9 && end == 0 )){
+
+                }else{
+           LineTo(hdc, nx[end], ny[end]);
+
+}
 
             }
         }
@@ -316,12 +323,13 @@ void BFS(HDC hdc, int xPos[n], int yPos[n], char* nn[n], int A[n][n], int start)
                 pushQueue(q, i);
                 paintLines(hdc, A, xPos, yPos, curVertex, i);
                 paintVertex(hdc, xPos, yPos, nn, i);
-                getch();
                 dist = a + 1;
                 distance[curVertex][i] = 1;
                 treeMatrix[curVertex][i] = 1;
                 sprintf_s(text, 2, "%d", dist);
                 TextOutA(hdc, xPos[i] - 20, yPos[i] + 15, text, 1);
+                Sleep(1500);
+                // getch();
             }
         }
         a++;
@@ -396,7 +404,8 @@ void DFS(HDC hdc, int xPos[n], int yPos[n], char* nn[n], int A[n][n], int start)
                     paintVertex(hdc, xPos, yPos, nn, i);
                     sprintf_s(text, 3, "%d", dist);
                     TextOutA(hdc, xPos[i] - 20, yPos[i] + 15, text, 2);
-                    getch();
+                    Sleep(1500);
+                  // getch();
                     break;
                 }
             }
@@ -503,7 +512,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT messg, WPARAM wParam, LPARAM lParam) {
 
         SelectObject(hdc, GreenPen);
 
-        //BFS(hdc, nx, ny, nn, B, 0); // пошук в ширину
+       // BFS(hdc, nx, ny, nn, B, 0); // пошук в ширину
 
         DFS(hdc, nx, ny, nn, B, 0); // пошук в глибину
 
